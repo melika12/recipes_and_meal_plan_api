@@ -20,7 +20,7 @@
     "recipes_and_meal_plan_api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/recipeitems",
+      "launchUrl": "api",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

@@ -1,26 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Melika\\School\\H6_ApprenticeshipExam\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api.csproj": {}
+    "C:\\Users\\simon\\Desktop\\Svendeprøve\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api.csproj": {}
   },
   "projects": {
-    "D:\\Melika\\School\\H6_ApprenticeshipExam\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api.csproj": {
+    "C:\\Users\\simon\\Desktop\\Svendeprøve\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Melika\\School\\H6_ApprenticeshipExam\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api.csproj",
+        "projectUniqueName": "C:\\Users\\simon\\Desktop\\Svendeprøve\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api.csproj",
         "projectName": "recipes_and_meal_plan_api",
-        "projectPath": "D:\\Melika\\School\\H6_ApprenticeshipExam\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api.csproj",
-        "packagesPath": "C:\\Users\\Melika\\.nuget\\packages\\",
-        "outputPath": "D:\\Melika\\School\\H6_ApprenticeshipExam\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\obj\\",
+        "projectPath": "C:\\Users\\simon\\Desktop\\Svendeprøve\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api.csproj",
+        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\simon\\Desktop\\Svendeprøve\\recipes_and_meal_plan_api\\recipes_and_meal_plan_api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Melika\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -52,6 +49,10 @@
               "version": "[5.0.17, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.17, )"
             },
@@ -96,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

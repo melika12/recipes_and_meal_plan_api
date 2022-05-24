@@ -24,6 +24,7 @@ namespace recipes_and_meal_plan_api
 
             services.AddControllers();
 
+            services.AddDbContext<UsersContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 11))));
             services.AddDbContext<RecipeContext>(opt => opt.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 11))));
         }
 
