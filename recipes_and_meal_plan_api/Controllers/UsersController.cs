@@ -41,6 +41,18 @@ namespace recipes_and_meal_plan_api.Controllers
             return users;
         }
 
+        // GET: api/Users/name?username=name
+        [HttpGet("name")]
+        public async Task<ActionResult<Users>> GetUsersByName(string username) {
+            var users = await _context.Users.Where(u => u.Username == username).ToListAsync();
+
+            if (users.Count > 0) {
+                return users[0];
+            } else {
+                return null;
+            }
+        }
+
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

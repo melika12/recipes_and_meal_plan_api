@@ -41,6 +41,18 @@ namespace recipes_and_meal_plan_api.Controllers
             return recipeItem;
         }
 
+        // GET: api/RecipeItems/meal?name=name
+        [HttpGet("meal")]
+        public async Task<ActionResult<Recipe>> GetRecipeByName(string name) {
+            var recipeName = await _context.Recipes.Where(n => n.Name == name).ToListAsync();
+
+            if (recipeName.Count > 0) {
+                return recipeName[0];
+            } else {
+                return null;
+            }
+        }
+
         // PUT: api/RecipeItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
