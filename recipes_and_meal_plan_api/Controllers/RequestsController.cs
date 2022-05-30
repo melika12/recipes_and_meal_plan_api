@@ -11,47 +11,47 @@ namespace recipes_and_meal_plan_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminUsersController : ControllerBase
+    public class RequestsController : ControllerBase
     {
-        private readonly AdminUsersContext _context;
+        private readonly RequestContext _context;
 
-        public AdminUsersController(AdminUsersContext context)
+        public RequestsController(RequestContext context)
         {
             _context = context;
         }
 
-        // GET: api/AdminUsers
+        // GET: api/Requests
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AdminUsers>>> GetAdminUsers()
+        public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
-            return await _context.AdminUsers.ToListAsync();
+            return await _context.Requests.ToListAsync();
         }
 
-        // GET: api/AdminUsers/5
+        // GET: api/Requests/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AdminUsers>> GetAdminUsers(int id)
+        public async Task<ActionResult<Request>> GetRequest(int id)
         {
-            var adminUsers = await _context.AdminUsers.FindAsync(id);
+            var request = await _context.Requests.FindAsync(id);
 
-            if (adminUsers == null)
+            if (request == null)
             {
                 return NotFound();
             }
 
-            return adminUsers;
+            return request;
         }
 
-        // PUT: api/AdminUsers/5
+        // PUT: api/Requests/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdminUsers(int id, AdminUsers adminUsers)
+        public async Task<IActionResult> PutRequest(int id, Request request)
         {
-            if (id != adminUsers.Id)
+            if (id != request.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(adminUsers).State = EntityState.Modified;
+            _context.Entry(request).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace recipes_and_meal_plan_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AdminUsersExists(id))
+                if (!RequestExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace recipes_and_meal_plan_api.Controllers
             return NoContent();
         }
 
-        // POST: api/AdminUsers
+        // POST: api/Requests
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AdminUsers>> PostAdminUsers(AdminUsers adminUsers)
+        public async Task<ActionResult<Request>> PostRequest(Request request)
         {
-            _context.AdminUsers.Add(adminUsers);
+            _context.Requests.Add(request);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAdminUsers), new { id = adminUsers.Id }, adminUsers);
+            return CreatedAtAction("GetRequest", new { id = request.Id }, request);
         }
 
-        // DELETE: api/AdminUsers/5
+        // DELETE: api/Requests/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAdminUsers(int id)
+        public async Task<IActionResult> DeleteRequest(int id)
         {
-            var adminUsers = await _context.AdminUsers.FindAsync(id);
-            if (adminUsers == null)
+            var request = await _context.Requests.FindAsync(id);
+            if (request == null)
             {
                 return NotFound();
             }
 
-            _context.AdminUsers.Remove(adminUsers);
+            _context.Requests.Remove(request);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AdminUsersExists(int id)
+        private bool RequestExists(int id)
         {
-            return _context.AdminUsers.Any(e => e.Id == id);
+            return _context.Requests.Any(e => e.Id == id);
         }
     }
 }

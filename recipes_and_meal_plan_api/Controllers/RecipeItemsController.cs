@@ -29,7 +29,7 @@ namespace recipes_and_meal_plan_api.Controllers
 
         // GET: api/RecipeItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipeItem(long id)
+        public async Task<ActionResult<Recipe>> GetRecipeItem(int id)
         {
             var recipeItem = await _context.Recipes.FindAsync(id);
 
@@ -56,7 +56,7 @@ namespace recipes_and_meal_plan_api.Controllers
         // PUT: api/RecipeItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipeItem(long id, Recipe recipeItem)
+        public async Task<IActionResult> PutRecipeItem(int id, Recipe recipeItem)
         {
             if (id != recipeItem.Id)
             {
@@ -97,7 +97,7 @@ namespace recipes_and_meal_plan_api.Controllers
 
         // DELETE: api/RecipeItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecipeItem(long id)
+        public async Task<IActionResult> DeleteRecipeItem(int id)
         {
             var recipeItem = await _context.Recipes.FindAsync(id);
             if (recipeItem == null)
@@ -111,7 +111,7 @@ namespace recipes_and_meal_plan_api.Controllers
             return NoContent();
         }
 
-        private bool RecipeItemExists(long id)
+        private bool RecipeItemExists(int id)
         {
             return _context.Recipes.Any(e => e.Id == id);
         }
