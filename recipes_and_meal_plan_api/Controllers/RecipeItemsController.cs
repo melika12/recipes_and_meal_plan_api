@@ -43,11 +43,11 @@ namespace recipes_and_meal_plan_api.Controllers
 
         // GET: api/RecipeItems/meal?name=name
         [HttpGet("meal")]
-        public async Task<ActionResult<Recipe>> GetRecipeByName(string name) {
-            var recipeName = await _context.Recipes.Where(n => n.Name == name).ToListAsync();
+        public async Task<ActionResult<List<Recipe>>> GetRecipeByName(string name) {
+            var recipeName = await _context.Recipes.Where(n => n.Name.Contains(name)).ToListAsync();
 
             if (recipeName.Count > 0) {
-                return recipeName[0];
+                return recipeName;
             } else {
                 return null;
             }
