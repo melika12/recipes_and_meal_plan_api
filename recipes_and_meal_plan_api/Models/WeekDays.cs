@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 namespace recipes_and_meal_plan_api.Models {
     public class WeekDays {
         public int Id { get; set; }
-        public int Language_id { get; set; }
         public string Name { get; set; }
     }
 }
