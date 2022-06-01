@@ -13,6 +13,6 @@ namespace recipes_and_meal_plan_api.Models
         public string Recipe_img_extension { get; set; }
         public string Recipe_description { get; set; }
         public string Recipe_course_of_action { get; set; }
-        public string Recipe_count_of_people { get; set; }
+        public int Recipe_count_of_people { get; set; }
     }
 }
