@@ -11,59 +11,75 @@ namespace recipes_and_meal_plan_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecipeItemsController : ControllerBase
+    public class RecipesController : ControllerBase
     {
         private readonly RecipeContext _context;
 
-        public RecipeItemsController(RecipeContext context)
+        public RecipesController(RecipeContext context)
         {
             _context = context;
         }
 
-        // GET: api/RecipeItems
+        // GET: api/Recipes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Recipe>>> GetTodoItems()
+        public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
-            return await _context.Recipes.ToListAsync();
+            return await _context.Recipes.Where(n => n.Request == 0).ToListAsync();
         }
 
-        // GET: api/RecipeItems/5
+        // GET: api/Recipes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Recipe>> GetRecipeItem(int id)
+        public async Task<ActionResult<Recipe>> GetRecipe(int id)
         {
-            var recipeItem = await _context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes.FindAsync(id);
 
-            if (recipeItem == null)
+            if (recipe == null)
             {
                 return NotFound();
             }
 
-            return recipeItem;
+            return recipe;
         }
 
-        // GET: api/RecipeItems/meal?name=name
+        // GET: api/Recipes/meal?name=name
         [HttpGet("meal")]
-        public async Task<ActionResult<List<Recipe>>> GetRecipeByName(string name) {
+        public async Task<ActionResult<List<Recipe>>> GetRecipeByName(string name)
+        {
             var recipeName = await _context.Recipes.Where(n => n.Name.Contains(name)).ToListAsync();
 
-            if (recipeName.Count > 0) {
+            if (recipeName.Count > 0)
+            {
                 return recipeName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        // GET: api/Recipes/Requests
+        [HttpGet("requests")]
+        public async Task<ActionResult<List<Recipe>>> GetRecipesByRequest() {
+            var recipes = await _context.Recipes.Where(n => n.Request == 1).ToListAsync();
+
+            if (recipes.Count > 0) {
+                return recipes;
             } else {
                 return null;
             }
         }
 
-        // PUT: api/RecipeItems/5
+        // PUT: api/Recipes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecipeItem(int id, Recipe recipeItem)
+        public async Task<IActionResult> PutRecipe(int id, Recipe recipe)
         {
-            if (id != recipeItem.Id)
+            if (id != recipe.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(recipeItem).State = EntityState.Modified;
+            _context.Entry(recipe).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +87,7 @@ namespace recipes_and_meal_plan_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecipeItemExists(id))
+                if (!RecipeExists(id))
                 {
                     return NotFound();
                 }
@@ -84,34 +100,34 @@ namespace recipes_and_meal_plan_api.Controllers
             return NoContent();
         }
 
-        // POST: api/RecipeItems
+        // POST: api/Recipes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Recipe>> PostRecipeItem(Recipe recipeItem)
+        public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
         {
-            _context.Recipes.Add(recipeItem);
+            _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetRecipeItem), new { id = recipeItem.Id }, recipeItem);
+            return CreatedAtAction(nameof(GetRecipe), new { id = recipe.Id }, recipe);
         }
 
-        // DELETE: api/RecipeItems/5
+        // DELETE: api/Recipes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRecipeItem(int id)
+        public async Task<IActionResult> DeleteRecipe(int id)
         {
-            var recipeItem = await _context.Recipes.FindAsync(id);
-            if (recipeItem == null)
+            var recipe = await _context.Recipes.FindAsync(id);
+            if (recipe == null)
             {
                 return NotFound();
             }
 
-            _context.Recipes.Remove(recipeItem);
+            _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool RecipeItemExists(int id)
+        private bool RecipeExists(int id)
         {
             return _context.Recipes.Any(e => e.Id == id);
         }

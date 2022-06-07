@@ -24,7 +24,7 @@ namespace recipes_and_meal_plan_api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ingredients>>> GetIngredients()
         {
-            return await _context.Ingredients.ToListAsync();
+            return await _context.Ingredients.Where(n => n.Request == 0).ToListAsync();
         }
 
         // GET: api/Ingredients/5
@@ -39,6 +39,22 @@ namespace recipes_and_meal_plan_api.Controllers
             }
 
             return ingredients;
+        }
+
+        // GET: api/Ingredients/Requests
+        [HttpGet("requests")]
+        public async Task<ActionResult<List<Ingredients>>> GetIngredientsByRequest()
+        {
+            var ingredients = await _context.Ingredients.Where(n => n.Request == 1).ToListAsync();
+
+            if (ingredients.Count > 0)
+            {
+                return ingredients;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         // PUT: api/Ingredients/5

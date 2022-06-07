@@ -24,7 +24,7 @@ namespace recipes_and_meal_plan_api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Units>>> GetUnits()
         {
-            return await _context.Units.ToListAsync();
+            return await _context.Units.Where(n => n.Request == 0).ToListAsync();
         }
 
         // GET: api/Units/5
@@ -39,6 +39,22 @@ namespace recipes_and_meal_plan_api.Controllers
             }
 
             return units;
+        }
+
+        // GET: api/Units/Requests
+        [HttpGet("requests")]
+        public async Task<ActionResult<List<Units>>> GetUnitsByRequest()
+        {
+            var units = await _context.Units.Where(n => n.Request == 1).ToListAsync();
+
+            if (units.Count > 0)
+            {
+                return units;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         // PUT: api/Units/5

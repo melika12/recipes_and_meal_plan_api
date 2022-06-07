@@ -7,5 +7,6 @@ namespace recipes_and_meal_plan_api.Models {
     public class Ingredients {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Request { get; set; }
     }
 }
