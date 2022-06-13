@@ -57,6 +57,22 @@ namespace recipes_and_meal_plan_api.Controllers
             }
         }
 
+        // GET: api/Ingredients/name?ingredientname=ingredientname
+        [HttpGet("name")]
+        public async Task<ActionResult<List<Ingredients>>> GetIngredientByName(string ingredientname)
+        {
+            var ingredient = await _context.Ingredients.Where(n => n.Name.Contains(ingredientname)).ToListAsync();
+
+            if (ingredient.Count > 0)
+            {
+                return ingredient;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         // PUT: api/Ingredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -97,6 +113,36 @@ namespace recipes_and_meal_plan_api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetIngredients), new { id = ingredients.Id }, ingredients);
+        }
+
+        // PATCH: api/Ingredients/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Ingredients>> PatchIngredients(int id)
+        {
+            var ingredient = await _context.Ingredients.Where(n => n.Id == id).FirstOrDefaultAsync();
+
+            ingredient.Request = 0;
+
+            _context.Entry(ingredient).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!IngredientsExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         // DELETE: api/Ingredients/5

@@ -57,6 +57,21 @@ namespace recipes_and_meal_plan_api.Controllers
             }
         }
 
+        // GET: api/RecipeIngredients/ingredients?ingredientIds=5&ingredientIds=4&ingredientIds=3
+        [HttpGet("ingredients")]
+        public async Task<ActionResult<List<RecipeIngredients>>> GetRecipeIngredientsByIngredientIds([FromQuery]int[] ingredientIds)
+        {
+            var recipeIngredients = await _context.RecipeIngredients.Where(n => ingredientIds.Contains(n.ingredient_id)).ToListAsync();
+
+            if (recipeIngredients.Count > 0)
+            {
+                return recipeIngredients;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         // PUT: api/RecipeIngredients/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

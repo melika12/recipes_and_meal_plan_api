@@ -57,6 +57,23 @@ namespace recipes_and_meal_plan_api.Controllers
             }
         }
 
+        // GET: api/Units/name?unitname=unitname
+        [HttpGet("name")]
+        public async Task<ActionResult<List<Units>>> GetUnitByName(string unitname)
+        {
+            var unit = await _context.Units.Where(n => n.Name.Contains(unitname)).ToListAsync();
+
+            if (unit.Count > 0)
+            {
+                return unit;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
         // PUT: api/Units/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -97,6 +114,36 @@ namespace recipes_and_meal_plan_api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUnits), new { id = units.Id }, units);
+        }
+
+        // PATCH: api/Units/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Units>> PatchUnits(int id)
+        {
+            var unit = await _context.Units.Where(n => n.Id == id).FirstOrDefaultAsync();
+
+            unit.Request = 0;
+
+            _context.Entry(unit).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UnitsExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         // DELETE: api/Units/5

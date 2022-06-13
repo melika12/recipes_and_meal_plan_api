@@ -111,6 +111,36 @@ namespace recipes_and_meal_plan_api.Controllers
             return CreatedAtAction(nameof(GetRecipe), new { id = recipe.Id }, recipe);
         }
 
+        // PATCH: api/Recipes/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Recipe>> PatchRecipes(int id)
+        {
+            var recipe = await _context.Recipes.Where(n => n.Id == id).FirstOrDefaultAsync();
+
+            recipe.Request = 0;
+
+            _context.Entry(recipe).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RecipeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // DELETE: api/Recipes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRecipe(int id)
