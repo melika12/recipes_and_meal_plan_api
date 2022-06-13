@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/recipeitems",
+      "launchUrl": "api/recipes",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -30,7 +30,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/recipeitems",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/recipes",
       "publishAllPorts": true,
       "useSSL": true
     }
